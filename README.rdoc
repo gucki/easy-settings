@@ -1,0 +1,61 @@
+= easy-settings
+
+Inspired by the mc-settings and config gems, but with a simpler code base and more flexible.
+
+== Installation
+
+Just include the screwdriver gem in your Bundler Gemfile
+
+  gem "easy-settings"
+
+== Usage
+
+Just create an instance of EasySettings (you can have as many as you need) and specify the sources, where this instance should load its settings/ configuration from. The sources are loaded in order and later settings override previous ones. This ways it's easy to for example put some defaults in a defaults.yml but override the settings using ENV variables or docker swarm secrets. Example:
+
+  Settings = EasySettings.new(
+    sources: [
+      EasySettings::YamlSource.new("config/settings/defaults.yml")),
+      EasySettings::YamlSource.new("config/settings/#{Rails.env}.yml")),
+      EasySettings::PathSource.new("/run/secrets"), # nice when using docker swarm secrets (the name of the file is the name of the setting, similar to the ENV source)
+      EasySettings::EnvSource.new("APP"), # APP__BUSINESS_TIME__ENABLED=true => Settings.business_time.enabled
+    ],
+    fail_on_missing: true,
+  )
+
+  MyConfig = EasySettings.new(
+    sources: [
+      EasySettings::YamlSource.new("config.yml"),
+      EasySettings::EnvSource.new("APP"),
+    ],
+  )
+
+You can also easily implement your own `Source` in case you have special requirements. Just have a look at the ones defined in this gem to see how.
+
+To access your settings:
+
+  Settings.apis.netskin.url # raises exception if setting cannot be found if fail_on_missing is true, nil otherwise
+  Settings.apis.netskin.try("url") # returns nil if setting cannot be found
+  Settings.business_time[2019].holidays # raises exception if setting cannot be found if fail_on_missing is true, nil otherwise
+
+To set/ change some settings programmatically:
+
+  Settings.apis.netskin.url = "https://www.netskin.com"
+  Settings.apis.netskin["url"] = "https://www.netskin.com"
+
+== Todo/ next steps
+
+* Add tests
+
+== Contributing
+
+* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
+* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
+* Fork the project
+* Start a feature/bugfix branch
+* Commit and push until you are happy with your contribution
+* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
+* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+
+== Copyright
+
+Copyright (c) by Corin Langosch. Released unter the MIT license.

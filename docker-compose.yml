@@ -1,0 +1,8 @@
+version: "2.1"
+
+services:
+  web:
+    build: .
+    command: bash -c 'sleep 100000'
+    volumes:
+      - ./:/home/web/app
