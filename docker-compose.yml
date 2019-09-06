@@ -6,3 +6,8 @@ services:
     command: bash -c 'sleep 100000'
     volumes:
       - ./:/home/web/app
+      - ~/.gem:/home/web/.gem
+      - ~/.gitconfig:/home/web/.gitconfig:ro
+      - $SSH_AUTH_SOCK:/auth-sock
+    environment:
+      - SSH_AUTH_SOCK=/auth-sock
