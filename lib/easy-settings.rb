@@ -1,3 +1,6 @@
+require "active_support"
+require "active_support/core_ext/module/delegation"
+
 require "easy-settings/version"
 require "easy-settings/struct"
 require "easy-settings/env_source"
@@ -7,7 +10,7 @@ require "easy-settings/yaml_source"
 class EasySettings
   delegate :respond_to?, to: :@data
 
-  def initialize(sources:, fail_on_missing: true)
+  def initialize(sources: [], fail_on_missing: true)
     @sources = sources
     @fail_on_missing = fail_on_missing
     reload!

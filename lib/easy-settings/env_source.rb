@@ -20,9 +20,9 @@ class EasySettings::EnvSource
 
         leaf = keys[0...-1].inject(data){ |h, key| h[key] ||= {} }
         leaf[keys.last] = parse_values ? EasySettings::Coercion.new(value).run : value
-      rescue NoMethodError => e
-        raise "Invalid name converter: #{converter}"
       end
     end
+  rescue NoMethodError => e
+    raise "Invalid name converter: #{converter}"
   end
 end
