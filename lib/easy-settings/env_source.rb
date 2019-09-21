@@ -14,7 +14,7 @@ class EasySettings::EnvSource
     {}.tap do |data|
       ENV.each do |variable, value|
         keys = variable.to_s.split(separator)
-        next unless keys.shift == prefix
+        next if prefix.present? && keys.shift != prefix
 
         keys.map!{ |key| key.send(converter) } if converter
 
