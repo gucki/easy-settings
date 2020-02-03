@@ -24,15 +24,15 @@ class EasySettings::Struct
   end
 
   def [](property)
-    @properties.fetch(property){ raise_unknown_property(property) }
+    @properties.fetch(property.to_s){ raise_unknown_property(property) }
   end
 
   def []=(property, value)
-    @properties[property] = value
+    @properties[property.to_s] = value
   end
 
   def try(property)
-    @properties[property]
+    @properties[property.to_s]
   end
 
   def to_h
