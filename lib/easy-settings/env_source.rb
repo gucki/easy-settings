@@ -1,13 +1,11 @@
-require "easy-settings/coercion"
+require "easy-settings/path_source"
 
-class EasySettings::EnvSource
-  attr_reader :prefix, :separator, :converter, :parse_values
+class EasySettings::EnvSource < EasySettings::PathSource
+  attr_reader :prefix
 
   def initialize(prefix, separator: "__", converter: :downcase, parse_values: true)
     @prefix = prefix
-    @separator = separator
-    @converter = converter
-    @parse_values = parse_values
+    super(nil, separator: separator, converter: converter, parse_values: parse_values)
   end
 
   def load
@@ -16,13 +14,8 @@ class EasySettings::EnvSource
         keys = variable.to_s.split(separator)
         next if prefix.present? && keys.shift != prefix
 
-        keys.map!{ |key| key.send(converter) } if converter
-
-        leaf = keys[0...-1].inject(data){ |h, key| h[key] ||= {} }
-        leaf[keys.last] = parse_values ? EasySettings::Coercion.new(value).run : value
+        assign_value(data, keys, value)
       end
     end
-  rescue NoMethodError => e
-    raise "Invalid name converter: #{converter}"
   end
 end

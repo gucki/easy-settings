@@ -19,13 +19,21 @@ class EasySettings::PathSource
         value = File.read(path).strip
 
         keys = variable.to_s.split(separator)
-        keys.map!{ |key| key.send(converter) } if converter
-
-        leaf = keys[0...-1].inject(data){ |h, key| h[key] ||= {} }
-        leaf[keys.last] = parse_values ? EasySettings::Coercion.new(value).run : value
+        assign_value(data, keys, value)
       end
     end
-  rescue NoMethodError => e
-    raise "Invalid name converter: #{converter}"
+  end
+
+  def assign_value(data, keys, value)
+    keys.map! do |key|
+      next key.to_i if key =~ /^\d+/
+      next key.send(converter) if converter
+      key
+    rescue NoMethodError => e
+      raise "Invalid name converter: #{converter}"
+    end
+
+    leaf = keys[0...-1].each_with_index.inject(data){ |h, (key, i)| h[key] ||= keys[i + 1].is_a?(Integer) ? [] : {} }
+    leaf[keys.last] = parse_values ? EasySettings::Coercion.new(value).run : value
   end
 end
