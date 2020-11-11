@@ -4,7 +4,7 @@ Inspired by the mc-settings and config gems, but with a simpler code base and mo
 
 == Installation
 
-Just include the screwdriver gem in your Bundler Gemfile
+Just include the easy-settings gem in your Bundler Gemfile
 
   gem "easy-settings"
 

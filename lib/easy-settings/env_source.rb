@@ -1,4 +1,5 @@
 require "easy-settings/path_source"
+require "active_support/core_ext/object"
 
 class EasySettings::EnvSource < EasySettings::PathSource
   attr_reader :prefix
