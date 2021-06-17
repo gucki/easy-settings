@@ -5,6 +5,7 @@ require "easy-settings/version"
 require "easy-settings/struct"
 require "easy-settings/env_source"
 require "easy-settings/path_source"
+require "easy-settings/certificate_manager_source"
 require "easy-settings/yaml_source"
 
 class EasySettings

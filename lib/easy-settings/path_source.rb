@@ -1,10 +1,11 @@
 require "easy-settings/coercion"
 
 class EasySettings::PathSource
-  attr_reader :base_path, :separator, :converter, :parse_values
+  attr_reader :base_path, :settings_root, :separator, :converter, :parse_values
 
-  def initialize(base_path, separator: "__", converter: :downcase, parse_values: true)
+  def initialize(base_path, settings_root: [], separator: "__", converter: :downcase, parse_values: true)
     @base_path = base_path.to_s
+    @settings_root = settings_root
     @separator = separator
     @converter = converter
     @parse_values = parse_values
@@ -16,9 +17,8 @@ class EasySettings::PathSource
         next unless File.file?(path)
 
         variable = path.gsub("#{base_path}/", "")
+        keys = settings_root + variable.to_s.split(separator)
         value = File.read(path).strip
-
-        keys = variable.to_s.split(separator)
         assign_value(data, keys, value)
       end
     end
