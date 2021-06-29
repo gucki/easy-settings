@@ -15,7 +15,7 @@ class EasySettings::CertificateManagerSource < EasySettings::PathSource
         keys = settings_root + variable.to_s.split(separator)
 
         filenames.each do |filename, key|
-          value = File.read("#{path}/#{filename}").strip
+          value = File.binread("#{path}/#{filename}").strip
           assign_value(data, keys + [key], value)
         end
       end

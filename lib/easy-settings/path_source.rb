@@ -18,7 +18,7 @@ class EasySettings::PathSource
 
         variable = path.gsub("#{base_path}/", "")
         keys = settings_root + variable.to_s.split(separator)
-        value = File.read(path).strip
+        value = File.binread(path).strip
         assign_value(data, keys, value)
       end
     end
