@@ -9,7 +9,7 @@ class EasySettings::YamlSource
   end
 
   def load
-    result = File.exist?(path) ? YAML.load(ERB.new(IO.read(path)).result) : {}
+    File.exist?(path) ? (YAML.load(ERB.new(IO.read(path)).result) || {}) : {}
   rescue StandardError => e
     raise "Error occurred while parsing #{path}: #{e.message}"
   end
