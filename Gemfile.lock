@@ -1,0 +1,57 @@
+PATH
+  remote: .
+  specs:
+    easy-settings (2.0.0)
+      activesupport (~> 3.0, >= 3.0.0)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    activesupport (3.1.12)
+      multi_json (~> 1.0)
+    date (3.4.1)
+    debug (1.10.0)
+      irb (~> 1.10)
+      reline (>= 0.3.8)
+    diff-lcs (1.2.5)
+    io-console (0.8.0)
+    irb (1.15.1)
+      pp (>= 0.6.0)
+      rdoc (>= 4.0.0)
+      reline (>= 0.4.2)
+    multi_json (1.15.0)
+    pp (0.6.2)
+      prettyprint
+    prettyprint (0.2.0)
+    psych (5.2.3)
+      date
+      stringio
+    rdoc (6.11.0)
+      psych (>= 4.0.0)
+    reline (0.6.0)
+      io-console (~> 0.5)
+    rspec (3.4.0)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+    rspec-core (3.4.2)
+      rspec-support (~> 3.4.0)
+    rspec-expectations (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-mocks (3.4.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-support (3.4.1)
+    stringio (3.1.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  debug (~> 1.10.0)
+  easy-settings!
+  rspec (~> 3.4.0)
+
+BUNDLED WITH
+   2.6.2

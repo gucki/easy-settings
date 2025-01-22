@@ -1,0 +1,14 @@
+{
+  "name": "Ruby Gem Dev Container",
+  "dockerFile": "Dockerfile",
+  "containerEnv": {
+    "RUBY_DEBUG_OPEN": "true"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Shopify.ruby-lsp"
+      ]
+    }
+  }
+}
