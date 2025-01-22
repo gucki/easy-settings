@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    easy-settings (2.0.0)
-      activesupport (~> 3.0, >= 3.0.0)
+    easy-settings (2.0.1)
+      activesupport (>= 3.0.0)
 
 GEM
   remote: http://rubygems.org/

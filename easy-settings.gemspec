@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   # specify any dependencies here; for example:
   s.required_ruby_version = ">= 2.6"
+  s.add_runtime_dependency "activesupport", ">= 3.0.0"
   s.add_development_dependency "rspec", "~> 3.4.0"
   s.add_development_dependency "debug", "~> 1.10.0"
-  s.add_runtime_dependency "activesupport", "~> 3.0", ">= 3.0.0"
 end

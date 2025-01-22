@@ -3,7 +3,8 @@ FROM ruby:3.4-alpine AS base
 RUN apk upgrade && apk -U add \
   bash \
   build-base \
-  git
+  git \
+  openssh-client
 
 RUN addgroup --gid 1000 vscode
 RUN adduser --uid 1000 vscode --ingroup vscode --disabled-password
